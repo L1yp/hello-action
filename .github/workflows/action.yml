@@ -2,24 +2,18 @@ name: hello-action
 
 on: [push]
 
-jobs: 
+jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - name: download jdk-14
+    - uses: actions/checkout@v2
+    - name: Set up JDK 14 for Shared Runner
+      uses: actions/setup-java@v1
+      with:
+        java-version: 14
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
       run: |
-        set -xeuo pipefail
-        sudo apt-get install jq -y # 安装jq扩展 解析json
-        result=`curl -H "Content-Type: application/json" -H "X-Real-IP: 127.0.0.1" -X POST -d '{"id": 368}' "https://api.l1yp.com/file/download"`
-        code=`echo $result | jq -r ".code"`
-        if [ $code -ne 200 ]; then
-        echo "错误代码：$code，错误信息："`echo $result | jq -r ".message"`
-        exit 1
-        fi
-        jdkUrl=`echo $result | jq -r ".data[0]"`
-        echo "jdk下载地址：$jdkUrl"
-        sudo mkdir /env/java -p
-        cd /env/java
-        echo "开始下载jdk"
-        sudo wget ${jdkUrl} -O openjdk-14_linux-x64_bin.tar.gz
-        sudo tar -zxf openjdk-14_linux-x64_bin.tar.gz
+        java -version  
