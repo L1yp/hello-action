@@ -11,6 +11,7 @@ jobs:
         set -xeuo pipefail
         sudo apt-get install jq -y # 安装jq扩展 解析json
         result=`curl -H "Content-Type: application/json" -H "X-Real-IP: 127.0.0.1" -X POST -d '{"id": 368}' "https://api.l1yp.com/file/download"`
+        code=`echo $result | jq -r ".code"`
         if [ $code -ne 200 ]; then
         echo "错误代码：$code，错误信息："`echo $result | jq -r ".message"`
         exit 1
