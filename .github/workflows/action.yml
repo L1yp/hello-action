@@ -1,0 +1,15 @@
+name: hello-action
+
+on: [push]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: print command
+      env:
+        JAVA_HOME: /env/java/jdk-14/bin
+        M2_HOME: /env/maven/maven-3.6.3/bin
+      run: |
+        echo $JAVA_HOME
+        echo $M2_HOME
