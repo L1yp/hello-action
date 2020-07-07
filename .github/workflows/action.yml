@@ -18,3 +18,9 @@ jobs:
         fi
         jdkUrl=`echo $result | jq -r ".data[0]"`
         echo "jdk下载地址：$jdkUrl"
+        sudo mkdir /env/java -p
+        cd /env/java
+        echo "开始下载jdk"
+        wget ${jdkUrl} -O openjdk-14_linux-x64_bin.tar.gz
+        tar -zxf openjdk-14_linux-x64_bin.tar.gz
+        
