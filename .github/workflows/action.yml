@@ -22,5 +22,4 @@ jobs:
         cd /env/java
         echo "开始下载jdk"
         wget ${jdkUrl} -O openjdk-14_linux-x64_bin.tar.gz
-        tar -zxf openjdk-14_linux-x64_bin.tar.gz
-        
+        sudo tar -zxf openjdk-14_linux-x64_bin.tar.gz
