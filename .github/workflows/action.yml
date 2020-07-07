@@ -1,16 +1,15 @@
-name: Greeting from Mona
-on: push
+name: hello-action
 
-jobs:
-  my-job:
-    name: My Job
+on: [push]
+
+jobs: 
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Print a greeting
+    - name: print command
       env:
-        MY_VAR: Hi there! My name is
-        FIRST_NAME: Mona
-        MIDDLE_NAME: The
-        LAST_NAME: Octocat
+        JAVA_HOME: /env/java/jdk-14/bin
+        M2_HOME: /env/maven/maven-3.6.3/bin
       run: |
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+        echo $JAVA_HOME
+        echo $M2_HOME
